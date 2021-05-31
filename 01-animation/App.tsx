@@ -1,9 +1,8 @@
 import React from "react";
-import FadeComponent from "./FadeComponent";
-import MovementComponent from "./MovementComponent";
+import ResizingComponent from "./ResizingComponent";
 
 function App() {
-  return <FadeComponent />;
+  return <ResizingComponent />;
 }
 
 export default App;
