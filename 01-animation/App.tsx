@@ -1,8 +1,8 @@
 import React from "react";
-import ResizingComponent from "./ResizingComponent";
+import ColorComponent from "./ColorComponent";
 
 function App() {
-  return <ResizingComponent />;
+  return <ColorComponent />;
 }
 
 export default App;
