@@ -1,8 +1,8 @@
 import React from "react";
-import ColorComponent from "./ColorComponent";
+import RotateComponent from "./RotateComponent";
 
 function App() {
-  return <ColorComponent />;
+  return <RotateComponent />;
 }
 
 export default App;
