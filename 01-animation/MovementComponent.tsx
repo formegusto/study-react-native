@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Animated, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-function AnimationComponent() {
+function MovementComponent() {
   const [ani, setAni] = useState<Animated.Value>(new Animated.Value(0));
   const [location, setLocation] = useState<string>("down");
 
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnimationComponent;
+export default MovementComponent;

@@ -1,13 +1,9 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
-import AnimationComponent from "./AnimationComponent";
+import FadeComponent from "./FadeComponent";
+import MovementComponent from "./MovementComponent";
 
 function App() {
-  return (
-    <SafeAreaView>
-      <AnimationComponent />
-    </SafeAreaView>
-  );
+  return <FadeComponent />;
 }
 
 export default App;
