@@ -1,21 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import React, { useCallback, useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as Location from "expo-location";
+
+type Coord = {
+  latitude: number;
+  longitude: number;
+};
 
 export default function App() {
+  const [coords, setCoords] = useState<Coord | null>(null);
+  useEffect(() => {
+    const requestAuth = async () => {
+      await Location.requestForegroundPermissionsAsync();
+    };
+
+    requestAuth();
+  }, []);
+
+  const readLoc = useCallback(async () => {
+    const loc = await Location.getCurrentPositionAsync();
+    setCoords(loc.coords);
+  }, []);
+
   return (
-    <View style={{ flex: 1 }}>
-      <MapView
-        style={{ flex: 1 }}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+    <View style={styles.container}>
+      <Text>{coords === null ? "정보가 없습니다" : `${coords.latitude}`}</Text>
+      <TouchableOpacity onPress={readLoc}>
+        <Text>test</Text>
+      </TouchableOpacity>
     </View>
   );
 }
