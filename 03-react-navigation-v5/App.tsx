@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import DetailScreen from "./screens/DetailScreen";
+import CreatePostScreen from "./screens/CreatePostScreen";
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,11 @@ function App() {
         <Stack.Screen name="Detail" options={{ title: "상세" }}>
           {(props) => <DetailScreen {...props} kind={"스택"} />}
         </Stack.Screen>
+        <Stack.Screen
+          name="CreatePost"
+          component={CreatePostScreen}
+          options={{ title: "게시물 등록하기" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
