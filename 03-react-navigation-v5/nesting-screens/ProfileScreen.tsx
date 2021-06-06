@@ -6,13 +6,16 @@ type Props = {
   navigation: any;
 };
 
-function MessagesScreen(props: Props) {
+function ProfileScreen(props: Props) {
   return (
     <View style={ViewStyles.FullSreen}>
-      <Text>메세지 스크린</Text>
-      <Button title="뒤로 가기" onPress={() => props.navigation.goBack()} />
+      <Text>Profile Screen</Text>
+      <Button
+        title="홈으로"
+        onPress={() => props.navigation.navigate("Home")}
+      />
     </View>
   );
 }
 
-export default MessagesScreen;
+export default ProfileScreen;

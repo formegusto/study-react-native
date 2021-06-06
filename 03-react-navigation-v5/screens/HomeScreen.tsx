@@ -44,6 +44,14 @@ function HomeScreen(props: Props) {
         title="카운트 페이지"
         onPress={() => props.navigation.navigate("Count")}
       />
+      <Button
+        title="Root"
+        onPress={() =>
+          props.navigation.navigate("Root", {
+            screen: "Setting",
+          })
+        }
+      />
     </View>
   );
 }
