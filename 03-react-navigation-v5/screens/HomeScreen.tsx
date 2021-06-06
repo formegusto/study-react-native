@@ -36,6 +36,14 @@ function HomeScreen(props: Props) {
         onPress={() => props.navigation.navigate("CreatePost")}
       />
       <Text>등록된 게시물 : {props.route.params?.post || "없음"}</Text>
+      <Button
+        title="헤더 페이지"
+        onPress={() => props.navigation.navigate("Header")}
+      />
+      <Button
+        title="카운트 페이지"
+        onPress={() => props.navigation.navigate("Count")}
+      />
     </View>
   );
 }
