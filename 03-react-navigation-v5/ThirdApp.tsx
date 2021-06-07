@@ -8,7 +8,7 @@ const Drawer = createDrawerNavigator();
 function ThirdApp() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Root">
         <Drawer.Screen name="Root" component={NestHomeScreen} />
         <Drawer.Screen name="Home" component={HomeScreen} />
       </Drawer.Navigator>

@@ -1,5 +1,5 @@
 import { ParamListBase, RouteProp } from "@react-navigation/core";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Button, Text, View } from "react-native";
 import ViewStyles from "../styles/ViewStyles";
 
@@ -15,6 +15,13 @@ interface Props {
 }
 
 function DetailScreen(props: Props) {
+  useEffect(() => {
+    console.log("DetailScreen Rendering");
+
+    return () => {
+      console.log("DetailScreen Unmount");
+    };
+  }, []);
   const { itemId, otherParam } = props.route.params as RouteProps;
 
   const Updating = useCallback(() => {
