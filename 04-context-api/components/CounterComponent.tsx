@@ -3,31 +3,33 @@ import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { CounterConsumer } from "../context/CounterContext";
 import Screens from "../styles/Screens";
 
-function CounterComponent() {
+type Props = {
+  number: number;
+  increase: () => void;
+  decrease: () => void;
+};
+
+function CounterComponent({ number, increase, decrease }: Props) {
   return (
-    <CounterConsumer>
-      {({ state, action }) => (
-        <View style={Screens.Full}>
-          <Text style={Styles.Count}>{state.number}</Text>
-          <View style={Styles.ButtonBlock}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={Styles.CountAction}
-              onPress={action.decrease}
-            >
-              <Text style={{ color: "#FFF" }}>-</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={Styles.CountAction}
-              onPress={action.increase}
-            >
-              <Text style={{ color: "#FFF" }}>+</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-    </CounterConsumer>
+    <View style={Screens.Full}>
+      <Text style={Styles.Count}>{number}</Text>
+      <View style={Styles.ButtonBlock}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={Styles.CountAction}
+          onPress={decrease}
+        >
+          <Text style={{ color: "#FFF" }}>-</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={Styles.CountAction}
+          onPress={increase}
+        >
+          <Text style={{ color: "#FFF" }}>+</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 

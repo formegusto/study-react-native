@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import CounterComponent from "../components/CounterComponent";
-import { CounterProvider } from "../context/CounterContext";
+import CounterContext from "../context/CounterContext";
 
 function CounterContainer() {
-  return (
-    <CounterProvider>
-      <CounterComponent />
-    </CounterProvider>
-  );
+  const { state, action } = useContext(CounterContext);
+  return <CounterComponent {...state} {...action} />;
 }
 
 export default CounterContainer;
