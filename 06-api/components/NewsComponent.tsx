@@ -1,15 +1,26 @@
 import React from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import NewsItem from "../atoms/NewsItem";
 
 import { Category } from "../common/categories";
+import { Article } from "../common/types";
 
 type Props = {
   category: Category;
+  articles: Article[];
+  loading: boolean;
 };
 
-function NewsComponent({ category }: Props) {
-  return (
+function NewsComponent({ category, articles, loading }: Props) {
+  return loading ? (
     <View style={Styles.NewsContainer}>
       <View style={Styles.Header}>
         <Text
@@ -22,9 +33,34 @@ function NewsComponent({ category }: Props) {
           {category.text}
         </Text>
       </View>
-      <View style={Styles.NewsBlock}>
-        <Text></Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator />
       </View>
+    </View>
+  ) : (
+    <View style={Styles.NewsContainer}>
+      <View style={Styles.Header}>
+        <Text
+          style={{
+            color: "#FFF",
+            paddingTop: getStatusBarHeight(),
+            fontSize: 20,
+          }}
+        >
+          {category.text}
+        </Text>
+      </View>
+      <ScrollView style={Styles.NewsBlock}>
+        {articles.map((article) => (
+          <NewsItem key={article.url} {...article} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -42,8 +78,7 @@ const Styles = StyleSheet.create({
   },
   NewsBlock: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "column",
   },
 });
 
