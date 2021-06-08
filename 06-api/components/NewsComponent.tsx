@@ -1,6 +1,7 @@
 import React from "react";
 import {
   ActivityIndicator,
+  RefreshControl,
   StatusBar,
   StyleSheet,
   Text,
@@ -17,9 +18,10 @@ type Props = {
   category: Category;
   articles: Article[];
   loading: boolean;
+  refresh: () => void;
 };
 
-function NewsComponent({ category, articles, loading }: Props) {
+function NewsComponent({ category, articles, loading, refresh }: Props) {
   return loading ? (
     <View style={Styles.NewsContainer}>
       <View style={Styles.Header}>
@@ -56,7 +58,12 @@ function NewsComponent({ category, articles, loading }: Props) {
           {category.text}
         </Text>
       </View>
-      <ScrollView style={Styles.NewsBlock}>
+      <ScrollView
+        style={Styles.NewsBlock}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={refresh} />
+        }
+      >
         {articles.map((article) => (
           <NewsItem key={article.url} {...article} />
         ))}
