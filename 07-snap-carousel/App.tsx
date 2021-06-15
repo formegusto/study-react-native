@@ -4,44 +4,45 @@ import { useRef } from "react";
 import { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import Carousel from "react-native-snap-carousel";
-import CarouselItem from "./CarouselItem";
-
-type Item = {
-  title: string;
-};
+import CarouselItem from "./atoms/CarouselItem";
+import items from "./store";
+import { Item } from "./types";
 
 function App() {
   const refCarousel = useRef<Carousel<Item>>(null);
-  const [item, setItem] = useState<any>([
-    {
-      title: "1",
-    },
-    {
-      title: "2",
-    },
-  ]);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}
-    >
-      <View
-        style={{
-          flex: 1,
-        }}
-      >
+    <SafeAreaView style={styles.container}>
+      <View style={styles.carouselBlock}>
         <Carousel
           ref={refCarousel}
-          data={item}
+          data={items}
           renderItem={CarouselItem}
           sliderWidth={300}
-          itemWidth={300}
+          sliderHeight={300}
+          itemWidth={275}
+          slideStyle={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         />
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    position: "relative",
+  },
+  carouselBlock: {
+    width: 300,
+    height: 350,
+    position: "absolute",
+    bottom: 32,
+  },
+});
 
 export default App;
