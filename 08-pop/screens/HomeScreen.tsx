@@ -5,9 +5,11 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import HeaderComponent from "../components/common/HeaderComponent";
 import IconMenuGroup from "../atoms/IconMenuGroup";
+import NewsItem from "../store/News";
 
 function HomeScreen() {
   const [news, setNews] = useState<"news" | "trend">("news");
@@ -18,236 +20,259 @@ function HomeScreen() {
 
   return (
     <SafeAreaView>
-      <HeaderComponent />
-      {/* 자산 정보, 메뉴 아이콘 */}
-      <View style={styles.marginWrap}>
-        <View style={styles.firstContent}>
-          <View style={styles.textBlock}>
-            <View style={{ ...styles.textGrp, marginBottom: 22 }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: "#333",
-                }}
-              >
-                김민우님의 총 자산
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  fontSize: 20,
-                  fontWeight: "700",
-                  color: "#292275",
-                  textAlign: "right",
-                }}
-              >
-                11,964,983{" "}
+      <ScrollView>
+        <HeaderComponent />
+        {/* 자산 정보, 메뉴 아이콘 */}
+        <View style={styles.marginWrap}>
+          <View style={styles.firstContent}>
+            <View style={styles.textBlock}>
+              <View style={{ ...styles.textGrp, marginBottom: 22 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: "#333",
+                  }}
+                >
+                  김민우님의 총 자산
+                </Text>
+                <Text
+                  style={{
+                    flex: 1,
+                    fontSize: 20,
+                    fontWeight: "700",
+                    color: "#292275",
+                    textAlign: "right",
+                  }}
+                >
+                  11,964,983{" "}
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    원
+                  </Text>
+                </Text>
+              </View>
+              <View style={styles.textGrp}>
                 <Text
                   style={{
                     fontSize: 12,
-                    color: "#A7A7A7",
+                    color: "#717171",
                   }}
                 >
-                  원
+                  투자금액
                 </Text>
-              </Text>
-            </View>
-            <View style={styles.textGrp}>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: "#717171",
-                }}
-              >
-                투자금액
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  textAlign: "right",
-                  fontSize: 16,
-                  fontWeight: "600",
-                }}
-              >
-                13,187,854{" "}
+                <Text
+                  style={{
+                    flex: 1,
+                    textAlign: "right",
+                    fontSize: 16,
+                    fontWeight: "600",
+                  }}
+                >
+                  13,187,854{" "}
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    원
+                  </Text>
+                </Text>
+              </View>
+              <View style={styles.textGrp}>
                 <Text
                   style={{
                     fontSize: 12,
-                    color: "#A7A7A7",
+                    color: "#717171",
                   }}
                 >
-                  원
+                  투자수익
                 </Text>
-              </Text>
-            </View>
-            <View style={styles.textGrp}>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: "#717171",
-                }}
-              >
-                투자수익
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  textAlign: "right",
-                  fontSize: 16,
-                  fontWeight: "600",
-                  color: "#6d64DD",
-                }}
-              >
-                -1,681,724{" "}
                 <Text
                   style={{
-                    fontSize: 10,
-                    color: "#A7A7A7",
+                    flex: 1,
+                    textAlign: "right",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    color: "#6d64DD",
                   }}
                 >
-                  원
+                  -1,681,724{" "}
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    원
+                  </Text>
                 </Text>
-              </Text>
-            </View>
-            <View style={styles.textGrp}>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: "#717171",
-                }}
-              >
-                수익률
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  textAlign: "right",
-                  fontSize: 16,
-                  fontWeight: "600",
-                }}
-              >
-                -12.75{" "}
+              </View>
+              <View style={styles.textGrp}>
                 <Text
                   style={{
                     fontSize: 12,
-                    color: "#A7A7A7",
+                    color: "#717171",
                   }}
                 >
-                  %
+                  수익률
                 </Text>
-              </Text>
-            </View>
-            <View style={styles.textGrp}>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: "#717171",
-                }}
-              >
-                출금가능금액
-              </Text>
-              <Text
-                style={{
-                  flex: 1,
-                  textAlign: "right",
-                  fontSize: 16,
-                  fontWeight: "600",
-                }}
-              >
-                351,661{" "}
+                <Text
+                  style={{
+                    flex: 1,
+                    textAlign: "right",
+                    fontSize: 16,
+                    fontWeight: "600",
+                  }}
+                >
+                  -12.75{" "}
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    %
+                  </Text>
+                </Text>
+              </View>
+              <View style={styles.textGrp}>
                 <Text
                   style={{
                     fontSize: 12,
-                    color: "#A7A7A7",
+                    color: "#717171",
                   }}
                 >
-                  원
+                  출금가능금액
                 </Text>
-              </Text>
+                <Text
+                  style={{
+                    flex: 1,
+                    textAlign: "right",
+                    fontSize: 16,
+                    fontWeight: "600",
+                  }}
+                >
+                  351,661{" "}
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: "#A7A7A7",
+                    }}
+                  >
+                    원
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View style={styles.firstContentMenuGrp}>
+              <View style={styles.firstContentMenu}>
+                <Text
+                  style={{
+                    color: "#292275",
+                    fontWeight: "600",
+                  }}
+                >
+                  전계좌현황
+                </Text>
+              </View>
+              <View style={styles.Line} />
+              <View style={styles.firstContentMenu}>
+                <Text
+                  style={{
+                    color: "#292275",
+                    fontWeight: "600",
+                  }}
+                >
+                  즉시이체
+                </Text>
+              </View>
             </View>
           </View>
-          <View style={styles.firstContentMenuGrp}>
-            <View style={styles.firstContentMenu}>
-              <Text
+        </View>
+        {/* 아이콘 블록 */}
+        <View style={styles.marginWrap}>
+          <IconMenuGroup />
+        </View>
+        <View
+          style={{ ...styles.wrap, height: 80, backgroundColor: "#CCC" }}
+        ></View>
+        <View style={styles.marginWrap}>
+          <View style={styles.newsContainer}>
+            <View style={styles.newsDistribute}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => changeNews("news")}
                 style={{
-                  color: "#292275",
-                  fontWeight: "600",
+                  marginRight: 24,
                 }}
               >
-                전계좌현황
-              </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: news === "news" ? "700" : "400",
+                  }}
+                >
+                  최근종목 국내뉴스
+                </Text>
+              </TouchableOpacity>
+              <View style={{ ...styles.Line, width: 1.5 }}></View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => changeNews("trend")}
+                style={{
+                  marginLeft: 24,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: news === "trend" ? "700" : "400",
+                  }}
+                >
+                  핫트렌드
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.Line} />
-            <View style={styles.firstContentMenu}>
-              <Text
-                style={{
-                  color: "#292275",
-                  fontWeight: "600",
-                }}
-              >
-                즉시이체
-              </Text>
+            <View style={styles.newsListBlock}>
+              {NewsItem.map((n, idx) => (
+                <View style={styles.newsItemBlock}>
+                  <Text
+                    numberOfLines={1}
+                    style={{
+                      fontSize: 12,
+                      color: "#999",
+                    }}
+                  >
+                    {n.title}
+                  </Text>
+                </View>
+              ))}
             </View>
           </View>
         </View>
-      </View>
-      {/* 아이콘 블록 */}
-      <View style={styles.marginWrap}>
-        <IconMenuGroup />
-      </View>
-      <View
-        style={{ ...styles.wrap, height: 80, backgroundColor: "#CCC" }}
-      ></View>
-      <View style={styles.marginWrap}>
-        <View style={styles.newsContainer}>
-          <View style={styles.newsDistribute}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => changeNews("news")}
-              style={{
-                marginRight: 24,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: news === "news" ? "700" : "400",
-                }}
-              >
-                최근종목 국내뉴스
-              </Text>
-            </TouchableOpacity>
-            <View style={{ ...styles.Line, width: 1.5 }}></View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => changeNews("trend")}
-              style={{
-                marginLeft: 24,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: news === "trend" ? "700" : "400",
-                }}
-              >
-                핫트렌드
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  newsItemBlock: {
+    marginBottom: 12,
+  },
+  newsListBlock: { marginTop: 24 },
   newsDistribute: {
     flexDirection: "row",
     alignItems: "center",
   },
   newsContainer: {
-    padding: 16,
+    paddingTop: 16,
+    paddingBottom: 4,
+    paddingHorizontal: 16,
     marginVertical: 16,
     backgroundColor: "#FFF",
     borderRadius: 8,
