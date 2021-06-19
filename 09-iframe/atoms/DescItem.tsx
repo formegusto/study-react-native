@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 function DescItem() {
   return (
@@ -8,7 +9,9 @@ function DescItem() {
         <View style={Styles.profileBlock} />
         <Text style={{ color: "#FFF" }}>What is Lorem Ipsum?</Text>
       </View>
-      <View style={Styles.imgBlock}></View>
+      <View style={Styles.imgBlock}>
+        <YoutubePlayer height={220} play={false} videoId={"_tMgdTKX78g"} />
+      </View>
       <Text style={{ marginTop: 10, color: "#FFF", paddingHorizontal: 10 }}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -29,7 +32,7 @@ const Styles = StyleSheet.create({
     width: "100%",
   },
   imgBlock: {
-    height: 400,
+    height: 215,
     backgroundColor: "#CCC",
   },
   headerBlock: {

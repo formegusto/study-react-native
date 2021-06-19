@@ -29,7 +29,6 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <YoutubePlayer height={220} play={true} videoId={"_tMgdTKX78g"} />
       <View style={styles.tabBar}>
         <TouchableOpacity
           style={styles.tabBarItem}
