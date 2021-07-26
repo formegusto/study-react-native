@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
+import image from "../assets/images/image_1.png";
 
 type Props = {
   number: number;
@@ -20,11 +21,9 @@ function Card({ number, onHero }: Props) {
       <SharedElement id={`card-${number}`}>
         <View style={styles.cardContainer}>
           <Image
-            source={{
-              uri: "http://pmullen.com/codepen/pEruv9g.jpg",
-              width: Dimensions.get("window").width - 32,
-              height: Dimensions.get("window").width,
-            }}
+            source={image}
+            style={{ width: "100%", height: "100%", borderRadius: 16 }}
+            resizeMode="cover"
           />
         </View>
       </SharedElement>
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: Dimensions.get("window").width - 32,
-    height: Dimensions.get("window").width,
+    height: Dimensions.get("window").width - 100,
     backgroundColor: "#CCC",
     marginBottom: 10,
     borderRadius: 16,
