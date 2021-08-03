@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -38,31 +38,15 @@ function PlayerScreen({ offset, offPlayer }: Props) {
       }}
     >
       <PlayerView>
-        <Header.Wrap>
-          <VideoView>
-            <MusicVideo
-              ref={refVideo}
-              source={scaredycat}
-              isLooping
-              resizeMode="cover"
-              isMuted
-            />
-          </VideoView>
-          <Header.View>
-            <Ionicons
-              name="chevron-down-outline"
-              size={28}
-              onPress={offPlayer}
-              color={SpotifyPalette["White"]}
-            />
-            <Header.AlbumTitle>Moodswings in This Order</Header.AlbumTitle>
-            <Ionicons
-              name="ellipsis-horizontal"
-              size={24}
-              color={SpotifyPalette["White"]}
-            />
-          </Header.View>
-        </Header.Wrap>
+        <VideoView>
+          <MusicVideo
+            ref={refVideo}
+            source={scaredycat}
+            isLooping
+            resizeMode="cover"
+            isMuted
+          />
+        </VideoView>
         <LinearGradient
           colors={[
             "rgba(25,20,20,0.3)",
@@ -76,6 +60,22 @@ function PlayerScreen({ offset, offPlayer }: Props) {
           end={[0, 1]}
         >
           <ContentView.Wrap>
+            <Header.Wrap>
+              <Header.View>
+                <Ionicons
+                  name="chevron-down-outline"
+                  size={28}
+                  onPress={offPlayer}
+                  color={SpotifyPalette["White"]}
+                />
+                <Header.AlbumTitle>Moodswings in This Order</Header.AlbumTitle>
+                <Ionicons
+                  name="ellipsis-horizontal"
+                  size={24}
+                  color={SpotifyPalette["White"]}
+                />
+              </Header.View>
+            </Header.Wrap>
             <MusicView.Wrap>
               <View
                 style={{
@@ -95,16 +95,19 @@ function PlayerScreen({ offset, offPlayer }: Props) {
                   name="play-skip-back"
                   size={48}
                   color={SpotifyPalette["White"]}
+                  margin
                 />
                 <MusicView.Icons
                   name="md-play-circle"
                   size={88}
                   color={SpotifyPalette["White"]}
+                  margin
                 />
                 <MusicView.Icons
                   name="play-skip-forward"
                   size={48}
                   color={SpotifyPalette["White"]}
+                  margin
                 />
                 <MusicView.Icons
                   name="sync"
@@ -131,7 +134,9 @@ const LyricsView = styled.View`
 `;
 
 const MusicView = {
-  Wrap: styled.View``,
+  Wrap: styled.View`
+    padding: 500px 0 0;
+  `,
   Title: styled.Text`
     font-size: 22px;
     font-weight: 700;
@@ -149,13 +154,17 @@ const MusicView = {
     align-items: center;
     margin: 0 0 30px;
   `,
-  Icons: styled(Ionicons)`
-    margin: 0 auto;
+  Icons: styled(Ionicons)<{ margin?: boolean }>`
+    ${(props) =>
+      props.margin &&
+      css`
+        margin: 0 auto;
+      `}
   `,
 };
 const ContentView = {
   Wrap: styled.View`
-    padding: 600px 16px 0;
+    padding: 0px 16px 0;
   `,
 };
 
@@ -168,6 +177,8 @@ const MusicVideo = styled(Video)`
 `;
 
 const VideoView = styled.View`
+  position: absolute;
+  top: 0;
   width: ${Dimensions.get("screen").width}px;
   height: ${Dimensions.get("screen").height}px;
 `;
@@ -181,39 +192,26 @@ const Wrap = styled(Animated.View)`
   background-color: #fff;
 `;
 
-const VideoWrap = styled.View`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(0, 0, 0, 0.3);
-`;
-
 const Header = {
-  Wrap: styled.View`
-    position: absolute;
-    top: 0;
-  `,
+  Wrap: styled.View``,
 
   View: styled.View`
-    position: absolute;
-    top: 0;
     flex-direction: row;
     flex-wrap: nowrap;
 
     align-items: center;
-    padding: ${getStatusBarHeight()}px 16px 0;
+    padding: ${getStatusBarHeight()}px 0 0;
 
     width: 100%;
   `,
   AlbumTitle: styled.Text`
-    flex: 1;
     text-align: center;
     font-size: 12px;
     font-weight: 700;
 
     color: ${SpotifyPalette["White"]};
+
+    margin: 0 auto;
   `,
 };
 
