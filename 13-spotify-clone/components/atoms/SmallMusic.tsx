@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image } from "react-native";
+import { Dimensions, Image, TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import SpotifyPalette from "../../styles/Palette";
 import mito from "../../assets/image/mito.jpg";
@@ -49,11 +49,17 @@ const AlbumText = styled.Text`
   color: ${SpotifyPalette["White"]};
 `;
 
-function SmallMusic() {
+type ViewProps = {
+  goAlbum: () => void;
+};
+
+function SmallMusic({ goAlbum }: ViewProps) {
   return (
     <SmallView>
       {Array.from({ length: 6 }).map((num, idx) => (
-        <MusicItem key={idx} isMargin={idx % 2 === 0} />
+        <TouchableOpacity key={idx} activeOpacity={0.9} onPress={goAlbum}>
+          <MusicItem isMargin={idx % 2 === 0} />
+        </TouchableOpacity>
       ))}
     </SmallView>
   );
