@@ -7,7 +7,21 @@ import SearchScreen from "./SearchScreen";
 const Shared = createSharedElementStackNavigator(
   {
     Main: SearchScreen,
-    Intro: IntroScreen,
+    Intro: {
+      screen: IntroScreen,
+      navigationOptions: {
+        gestureEnabled: false,
+        transitionSpec: {
+          open: { animation: "timing", config: { duration: 300 } },
+          close: { animation: "timing", config: { duration: 300 } },
+        },
+        cardStyleInterpolator: ({ current: { progress } }) => ({
+          cardStyle: {
+            opacity: progress,
+          },
+        }),
+      },
+    },
   },
   {
     headerMode: "none",

@@ -26,13 +26,13 @@ export default function App() {
               open: { animation: "timing", config: { duration: 1000 } },
               close: { animation: "timing", config: { duration: 1000 } },
             },
-            // cardStyleInterpolator: ({ current: { progress } }) => {
-            //   return {
-            //     cardStyle: {
-            //       opacity: progress,
-            //     },
-            //   };
-            // },
+            cardStyleInterpolator: ({ current: { progress } }) => {
+              return {
+                cardStyle: {
+                  opacity: progress,
+                },
+              };
+            },
           })}
         />
       </Stack.Navigator>

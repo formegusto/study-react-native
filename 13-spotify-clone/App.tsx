@@ -12,6 +12,9 @@ import { FullScreen } from "./styles";
 import Player from "./components/atoms/Player";
 import { Animated } from "react-native";
 import PlayerScreen from "./components/atoms/PlayerScreen";
+import { enableScreens } from "react-native-screens";
+
+enableScreens(false);
 
 const Tabs = createBottomTabNavigator();
 
