@@ -81,7 +81,7 @@ const Item = {
 
 function MiddleMusic(props: Props) {
   return (
-    <ScrollView horizontal>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {Array.from({ length: 4 }).map((num, idx) => (
         <MiddleMusicItem key={idx} {...props} />
       ))}

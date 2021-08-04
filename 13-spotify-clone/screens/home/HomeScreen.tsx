@@ -40,6 +40,7 @@ function HomeScreen({ navigation }: Props) {
           [{ nativeEvent: { contentOffset: { y: headerOffset } } }],
           { useNativeDriver: true }
         )}
+        indicatorStyle="white"
       >
         <LinearGradient
           colors={[
@@ -52,7 +53,7 @@ function HomeScreen({ navigation }: Props) {
           start={[0, 0]}
           end={[0.7, 0.7]}
         >
-          <Wrap style={{ height: getStatusBarHeight() }} />
+          <Wrap style={{ height: 0 }} />
           <Wrap horizontalMargin>
             <Title.View>
               <Title.Text>즐거운 오후입니다</Title.Text>
