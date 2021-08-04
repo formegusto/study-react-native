@@ -1,24 +1,32 @@
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import styled from "styled-components/native";
-import tree from "../../assets/image/tree.jpg";
-import canilove from "../../assets/image/canilove.jpg";
-import action from "../../assets/image/action.jpg";
-import memories from "../../assets/image/memories.jpg";
+import styled, { css } from "styled-components/native";
 import SpotifyPalette from "../../styles/Palette";
 
-const images = [tree, memories, canilove, action];
+type Props = {
+  isRadius?: boolean;
+  isOnlyTitle?: boolean;
+  isTextCenter?: boolean;
+  images?: any[];
+  isFull?: boolean;
+  title?: string;
+};
 
-function MiddleMusicItem() {
+function MiddleMusicItem(props: Props) {
   return (
     <Item.View>
-      <Item.ImageGrid>
-        {images.map((img, idx) => (
-          <Item.Image source={img} key={idx} resizeMode="cover" />
-        ))}
+      <Item.ImageGrid {...props}>
+        {}
+        {props.images?.length === 1 ? (
+          <Item.Image source={props.images[0]} resizeMode="cover" isFull />
+        ) : (
+          props.images?.map((img, idx) => (
+            <Item.Image source={img} key={idx} resizeMode="cover" />
+          ))
+        )}
       </Item.ImageGrid>
-      <Item.Title>{"#formegusto"}</Item.Title>
-      <Item.Type>Playlist</Item.Type>
+      <Item.Title {...props}>{props.title}</Item.Title>
+      {!props.isTextCenter && <Item.Type>Playlist</Item.Type>}
     </Item.View>
   );
 }
@@ -27,22 +35,43 @@ const Item = {
   View: styled.View`
     margin: 0 16px 0 0;
   `,
-  ImageGrid: styled.View`
+  ImageGrid: styled.View<Props>`
     flex-direction: row;
     flex-wrap: wrap;
     width: 200px;
     height: 200px;
     margin: 0 0 8px;
+
+    overflow: hidden;
+
+    ${({ isRadius }) =>
+      isRadius &&
+      css`
+        border-radius: 200px;
+      `}
   `,
-  Image: styled.Image`
+  Image: styled.Image<Props>`
     width: 100px;
     height: 100px;
+
+    ${({ isFull }) =>
+      isFull &&
+      css`
+        width: 100%;
+        height: 100%;
+      `}
   `,
-  Title: styled.Text`
+  Title: styled.Text<Props>`
     font-size: 12px;
     font-weight: 900;
     color: ${SpotifyPalette["White"]};
     margin: 0 0 4px;
+
+    ${({ isTextCenter }) =>
+      isTextCenter &&
+      css`
+        text-align: center;
+      `}
   `,
   Type: styled.Text`
     font-size: 10px;
@@ -50,11 +79,11 @@ const Item = {
   `,
 };
 
-function MiddleMusic() {
+function MiddleMusic(props: Props) {
   return (
     <ScrollView horizontal>
       {Array.from({ length: 4 }).map((num, idx) => (
-        <MiddleMusicItem key={idx} />
+        <MiddleMusicItem key={idx} {...props} />
       ))}
     </ScrollView>
   );

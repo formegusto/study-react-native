@@ -10,10 +10,18 @@ import SmallHeader from "../../components/atoms/SmallHeader";
 import Animated from "react-native-reanimated";
 import { StackNavigationProp } from "@react-navigation/stack";
 import MiddleMusic from "../../components/atoms/MiddleMusic";
+import tree from "../../assets/image/tree.jpg";
+import canilove from "../../assets/image/canilove.jpg";
+import action from "../../assets/image/action.jpg";
+import memories from "../../assets/image/memories.jpg";
+import dprian from "../../assets/image/dprian.jpg";
 
 type Props = {
   navigation: StackNavigationProp<any, "HomeIndex">;
 };
+
+const playlist_images = [tree, memories, canilove, action];
+const artist_images = [dprian];
 
 function HomeScreen({ navigation }: Props) {
   const headerOffset = React.useRef<Animated.Value<number>>(
@@ -70,50 +78,27 @@ function HomeScreen({ navigation }: Props) {
             <Title.View>
               <Title.Text>내 플레이리스트</Title.Text>
             </Title.View>
-            <MiddleMusic />
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>힙스터 감성 충전</Title.Text>
-            </Title.View>
-            <MiddleMusic />
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>최근 재생한 항목</Title.Text>
-            </Title.View>
-            <MiddleMusic />
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>다시 들어보세요</Title.Text>
-            </Title.View>
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>내가 즐겨 듣는 믹스</Title.Text>
-            </Title.View>
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>힙합</Title.Text>
-            </Title.View>
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>조금만 더 열심히!</Title.Text>
-            </Title.View>
-          </Wrap>
-          <Wrap horizontalMargin="onlyOne">
-            <Title.View>
-              <Title.Text>K-pop</Title.Text>
-            </Title.View>
+            <MiddleMusic images={playlist_images} title="#formegusto" />
           </Wrap>
           <Wrap horizontalMargin="onlyOne">
             <Title.View>
               <Title.Text>좋아하는 아티스트</Title.Text>
             </Title.View>
+            <MiddleMusic
+              isRadius
+              isTextCenter
+              isOnlyTitle
+              images={artist_images}
+              title="DPR IAN"
+            />
           </Wrap>
+          <Wrap horizontalMargin="onlyOne">
+            <Title.View>
+              <Title.Text>최근 재생한 항목</Title.Text>
+            </Title.View>
+            <MiddleMusic images={playlist_images} title="#formegusto" />
+          </Wrap>
+
           <Wrap horizontalMargin="onlyOne">
             <Title.View>
               <Title.Text>릴보이</Title.Text>
