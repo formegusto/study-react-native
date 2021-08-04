@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "./screens/home";
-import SearchScreen from "./screens/SearchScreen";
+import SearchStack from "./screens/search";
 import LibraryScreen from "./screens/LibraryScreen";
 import { Ionicons } from "@expo/vector-icons";
 import SpotifyPalette from "./styles/Palette";
@@ -26,7 +26,7 @@ const Navs = [
   {
     name: "Search",
     label: "검색하기",
-    component: SearchScreen,
+    component: SearchStack,
     icon: <Ionicons name="search-outline" size={24} color="#B5B5B5" />,
     activeIcon: <Ionicons name="search" size={24} color="white" />,
   },
