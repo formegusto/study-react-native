@@ -17,14 +17,9 @@ type Props = {
 
 function SearchScreen({ navigation }: Props) {
   const [intro, setIntro] = React.useState<boolean>(false);
-  const offIntro = React.useCallback(() => {
-    setIntro(false);
-  }, []);
+
   const onIntro = React.useCallback(() => {
-    setIntro(true);
-    navigation.navigate("Intro", {
-      offIntro: offIntro,
-    });
+    navigation.navigate("Intro");
   }, [navigation]);
 
   return (
@@ -49,9 +44,7 @@ function SearchScreen({ navigation }: Props) {
             </SearchForm.View>
           </View>
           <TouchableOpacity activeOpacity={0.9} onPress={onIntro}>
-            <SharedElement id="intro">
-              <BigCard intro={intro} />
-            </SharedElement>
+            <BigCard intro={intro} />
           </TouchableOpacity>
           <GenreTitle>가장 많이 듣는 장르</GenreTitle>
           <SmallCardGrid items={MyGenres} />

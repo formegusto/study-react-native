@@ -1,5 +1,7 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
+import { abs } from "react-native-reanimated";
 import { SharedElement } from "react-navigation-shared-element";
 import styled, { css } from "styled-components/native";
 import hte from "../../assets/image/happierthanever.jpg";
@@ -11,8 +13,12 @@ type Props = {
 function BigCard({ intro }: Props) {
   return (
     <Card.View>
-      <Card.Image source={hte} resizeMode="cover" />
-
+      <SharedElement id="intro">
+        <Card.Image source={hte} resizeMode="cover" />
+      </SharedElement>
+      <SharedElement id="intro-shadow" style={StyleSheet.absoluteFill}>
+        <Card.ImageWrap />
+      </SharedElement>
       <Card.ContentView>
         <SharedElement id="title">
           <Card.Title intro={intro}>Happier Than Ever를 소개합니다</Card.Title>
@@ -41,6 +47,13 @@ const Card = {
     width: 100%;
     height: 100%;
   `,
+  ImageWrap: styled.View`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(33, 33, 33, 0.5);
+  `,
   ContentView: styled.View`
     justify-content: flex-end;
     position: absolute;
@@ -49,7 +62,6 @@ const Card = {
     height: 100%;
 
     padding: 16px;
-    background-color: rgba(33, 33, 33, 0.5);
   `,
   Title: styled.Text<{ intro: boolean }>`
     color: #aea799;

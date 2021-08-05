@@ -16,10 +16,7 @@ type Props = {
 };
 
 function IntroScreen({ route, navigation }: Props) {
-  const [introOff, setIntroOff] = React.useState<boolean>(false);
   const offIntroScreen = useCallback(() => {
-    setIntroOff(true);
-    (navigation as any).getParam("offIntro")();
     navigation.goBack();
   }, [navigation]);
 
@@ -27,6 +24,9 @@ function IntroScreen({ route, navigation }: Props) {
     <Intro.View>
       <SharedElement id="intro" style={StyleSheet.absoluteFill}>
         <Intro.Image source={hte} resizeMode="cover" />
+      </SharedElement>
+      <SharedElement id="intro-shadow" style={StyleSheet.absoluteFill}>
+        <Intro.ImageShadow />
       </SharedElement>
       <Content.Wrap>
         <Header.View>
@@ -77,7 +77,7 @@ const Content = {
     width: 100%;
     height: 100%;
 
-    background-color: rgba(33, 33, 33, 0.5);
+    /* background-color: rgba(33, 33, 33, 0.5); */
   `,
   View: styled.View`
     padding: 0 16px;
@@ -120,6 +120,7 @@ const Intro = {
 
 IntroScreen.sharedElements = (route: any, otherRoute: any, showing: any) => [
   { id: "intro" },
+  { id: "intro-shadow" },
   { id: "title", animation: "fade" },
   { id: "desc", animation: "fade" },
 ];
