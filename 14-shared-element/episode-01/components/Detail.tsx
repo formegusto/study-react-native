@@ -1,11 +1,12 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, View, Animated } from "react-native";
 import {
   FlatList,
   ScrollView,
   TouchableOpacity,
 } from "react-native-gesture-handler";
+// import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SharedElement } from "react-navigation-shared-element";
 import FLOWERS from "../stores/Flower";
@@ -21,10 +22,47 @@ function Detail({ route, navigation }: Props) {
   const item = route.params.flower;
   const ref = React.useRef<any>();
   const selectedItemIndex = FLOWERS.findIndex((i) => item.id === i.id);
+  const mountedAnimation = React.useRef(new Animated.Value(0)).current;
+  const activeIndex = React.useRef(
+    new Animated.Value(selectedItemIndex)
+  ).current;
+  const activeIndexAnimation = React.useRef(
+    new Animated.Value(selectedItemIndex)
+  ).current;
+
+  const animation = (toValue: number, delay: number = 0) =>
+    Animated.timing(mountedAnimation, {
+      toValue,
+      duration: 500,
+      delay,
+      useNativeDriver: true,
+    });
+
+  React.useEffect(() => {
+    Animated.parallel([
+      Animated.timing(activeIndexAnimation, {
+        toValue: activeIndex,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      animation(1, 1000),
+    ]).start();
+  }, []);
+
+  const translateY = mountedAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [50, 0],
+  });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <BackIcon onPress={() => navigation.goBack()} />
+      <BackIcon
+        onPress={() => {
+          animation(0).start(() => {
+            navigation.goBack();
+          });
+        }}
+      />
       <View
         style={{
           flexDirection: "row",
@@ -44,7 +82,11 @@ function Detail({ route, navigation }: Props) {
           </TouchableOpacity>
         ))}
       </View>
-      <FlatList
+      <Animated.FlatList
+        style={{
+          opacity: mountedAnimation,
+          transform: [{ translateY }],
+        }}
         ref={ref}
         data={FLOWERS}
         keyExtractor={(item) => item.id}
