@@ -3,7 +3,6 @@ import React from "react";
 import styled, { css } from "styled-components/native";
 import { FullScreen } from "../../styles";
 import SpotifyPalette from "../../styles/Palette";
-import { getStatusBarHeight } from "react-native-status-bar-height";
 import { Ionicons } from "@expo/vector-icons";
 import SmallMusic from "../../components/atoms/SmallMusic";
 import SmallHeader from "../../components/atoms/SmallHeader";
