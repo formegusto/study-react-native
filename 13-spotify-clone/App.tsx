@@ -62,7 +62,7 @@ function App() {
   }, []);
 
   return (
-    <FullScreen>
+    <FullScreen black>
       <NavigationContainer>
         <Tabs.Navigator
           screenOptions={{
