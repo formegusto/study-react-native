@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated } from "react-native";
+import { Animated, Dimensions } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import styled from "styled-components/native";
 import Categories from "../stores/Category";
@@ -45,31 +45,39 @@ function LibraryScreen() {
         )}
       >
         <HeaderView.Wrap>
+          <HeaderView.CategoryWrap
+            style={{
+              transform: [
+                {
+                  translateY: offset.interpolate({
+                    inputRange: [0, 38],
+                    outputRange: [0, -38],
+                    extrapolate: "clamp",
+                  }),
+                },
+              ],
+            }}
+          >
+            <HeaderView.CategoryOpacityWrap
+              style={{
+                opacity: offset.interpolate({
+                  inputRange: [0, 20],
+                  outputRange: [1, 0],
+                  extrapolate: "clamp",
+                }),
+              }}
+            >
+              <CategoryList categories={Categories} />
+            </HeaderView.CategoryOpacityWrap>
+          </HeaderView.CategoryWrap>
           <HeaderView.View>
             <Profile.View>
               <Profile.Text>H</Profile.Text>
             </Profile.View>
             <HeaderView.Title>내 라이브러리</HeaderView.Title>
           </HeaderView.View>
-          <HeaderView.CategoryWrap
-            style={{
-              transform: [
-                {
-                  translateY: offset.interpolate({
-                    inputRange: [0, 90],
-                    outputRange: [0, -90],
-                  }),
-                },
-              ],
-              opacity: offset.interpolate({
-                inputRange: [0, 40],
-                outputRange: [1, 0],
-              }),
-            }}
-          >
-            <CategoryList categories={Categories} />
-          </HeaderView.CategoryWrap>
         </HeaderView.Wrap>
+        <PaddingView />
         <LibraryList />
         <LibraryList />
       </LibraryWrap>
@@ -77,6 +85,9 @@ function LibraryScreen() {
   );
 }
 
+const PaddingView = styled.View`
+  height: 38px;
+`;
 const LibraryWrap = styled(Animated.ScrollView)``;
 
 const Profile = {
@@ -99,7 +110,7 @@ const Profile = {
 const HeaderView = {
   Wrap: styled.View`
     padding: ${getStatusBarHeight() + 20}px 16px 0;
-    box-shadow: 2px 2px 4px #000;
+    /* box-shadow: 4px 4px 4px #000; */
     background-color: ${SpotifyPalette["Black"]};
   `,
   View: styled.View`
@@ -113,7 +124,15 @@ const HeaderView = {
     font-size: 22px;
     font-weight: 900;
   `,
-  CategoryWrap: styled(Animated.View)``,
+  CategoryWrap: styled(Animated.View)`
+    position: absolute;
+    bottom: -34px;
+    width: ${Dimensions.get("screen").width}px;
+    background-color: ${SpotifyPalette["Black"]};
+    padding: 0 16px 0;
+    box-shadow: 0px 4px 2px #000;
+  `,
+  CategoryOpacityWrap: styled(Animated.View)``,
 };
 
 export default LibraryScreen;
