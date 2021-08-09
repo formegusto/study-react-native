@@ -1,20 +1,21 @@
 import { Ionicons } from "@expo/vector-icons";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import Ani from "react-native-reanimated";
 import { Animated, Dimensions } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import styled from "styled-components/native";
-import Categories from "../stores/Category";
-import { AnimatedFullScreen, FullScreen } from "../styles";
-import SpotifyPalette from "../styles/Palette";
-import CategoryList from "./common/CategoryList";
-import LibraryList from "./common/LibraryList";
-import PlusPlayListModal from "./common/PlusPlayListModal";
+import Categories from "../../stores/Category";
+import { AnimatedFullScreen, FullScreen } from "../../styles";
+import SpotifyPalette from "../../styles/Palette";
+import CategoryList from "../common/CategoryList";
+import LibraryList from "../common/LibraryList";
+import PlusPlayListModal from "../common/PlusPlayListModal";
 
-type RefMap = {
-  [key: string]: any;
+type Props = {
+  navigation: StackNavigationProp<any, "Library">;
 };
-function LibraryScreen() {
+
+function LibraryScreen({ navigation }: Props) {
   // const changeCat = React.useCallback((text: string | null) => {
   //   console.log(
   //     refs.current[text!].measure(
@@ -116,6 +117,7 @@ function LibraryScreen() {
                   name="search"
                   size={24}
                   color={SpotifyPalette["White"]}
+                  onPress={() => navigation.push("Search")}
                 />
                 <HeaderView.Icon
                   name="add"

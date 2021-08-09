@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "./screens/home";
 import SearchStack from "./screens/search";
-import LibraryScreen from "./screens/LibraryScreen";
+import LibraryStack from "./screens/library";
 import { Ionicons } from "@expo/vector-icons";
 import SpotifyPalette from "./styles/Palette";
 import { LinearGradient } from "expo-linear-gradient";
@@ -36,7 +36,7 @@ const Navs = [
   {
     name: "Library",
     label: "내 라이브러리",
-    component: LibraryScreen,
+    component: LibraryStack,
     icon: <Ionicons name="library-outline" size={24} color="#B5B5B5" />,
     activeIcon: <Ionicons name="library" size={24} color="white" />,
   },

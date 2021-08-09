@@ -2,7 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./HomeScreen";
 import AlbumScreen from "../common/AlbumScreen";
-import { Animated } from "react-native";
 
 const Stack = createStackNavigator();
 
