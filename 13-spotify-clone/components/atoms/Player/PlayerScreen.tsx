@@ -11,6 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
+import { ActivityIndicator } from "react-native";
 
 type Props = {
   navigation: StackNavigationProp<any>;
@@ -18,6 +19,7 @@ type Props = {
 
 function PlayerScreen({ navigation }: any) {
   const refVideo = React.useRef<Video>(null);
+  const [videoLoading, setVideoLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
     refVideo.current?.playAsync();
@@ -25,7 +27,7 @@ function PlayerScreen({ navigation }: any) {
 
   return (
     <Wrap>
-      <PlayerView>
+      <PlayerView scrollEnabled={!videoLoading}>
         <VideoView>
           <MusicVideo
             ref={refVideo}
@@ -33,8 +35,22 @@ function PlayerScreen({ navigation }: any) {
             isLooping
             resizeMode="cover"
             isMuted
+            onPlaybackStatusUpdate={(playbackStatus: any) => {
+              if (playbackStatus.isPlaying && videoLoading)
+                setVideoLoading(false);
+            }}
           />
         </VideoView>
+        {videoLoading && (
+          <ActivityIndicator
+            style={{
+              position: "absolute",
+              top: Dimensions.get("screen").height / 2 - 10,
+              left: Dimensions.get("screen").width / 2 - 10,
+            }}
+          />
+        )}
+
         <LinearGradient
           colors={[
             "rgba(25,20,20,0.3)",
