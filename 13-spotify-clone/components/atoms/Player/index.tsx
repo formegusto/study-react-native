@@ -1,18 +1,25 @@
 import React from "react";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
-import IntroScreen from "./IntroScreen";
-import SearchScreen from "./SearchScreen";
+import LyricsScreen from "./LyricsScreen";
+import PlayerScreen from "./PlayerScreen";
 
 const Shared = createSharedElementStackNavigator();
 
-const SearchStack = (props: any) => {
+const PlayerStack = () => {
   return (
-    <Shared.Navigator initialRouteName="Main" headerMode="none">
-      <Shared.Screen name="Main" component={SearchScreen} />
+    <Shared.Navigator
+      initialRouteName="Player"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Shared.Screen name="Player" component={PlayerScreen} />
       <Shared.Screen
-        name="Intro"
-        component={IntroScreen}
+        name="Lyrics"
+        component={LyricsScreen}
+        sharedElementsConfig={() => [{ id: "view" }]}
         options={{
+          cardStyle: { backgroundColor: "transparent" },
           gestureEnabled: false,
           transitionSpec: {
             open: { animation: "timing", config: { duration: 300 } },
@@ -24,15 +31,9 @@ const SearchStack = (props: any) => {
             },
           }),
         }}
-        sharedElementsConfig={() => [
-          { id: "intro" },
-          { id: "intro-shadow" },
-          { id: "title", animation: "fade" },
-          { id: "desc", animation: "fade" },
-        ]}
       />
     </Shared.Navigator>
   );
 };
 
-export default SearchStack;
+export default PlayerStack;

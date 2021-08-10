@@ -15,7 +15,7 @@ type Props = {
   navigation: StackNavigationProp<any, "Intro">;
 };
 
-function IntroScreen({ route, navigation }: Props) {
+function IntroScreen({ navigation }: Props) {
   const offIntroScreen = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
@@ -117,12 +117,5 @@ const Intro = {
     background-color: rgba(33, 33, 33, 0.5);
   `,
 };
-
-IntroScreen.sharedElements = (route: any, otherRoute: any, showing: any) => [
-  { id: "intro" },
-  { id: "intro-shadow" },
-  { id: "title", animation: "fade" },
-  { id: "desc", animation: "fade" },
-];
 
 export default IntroScreen;

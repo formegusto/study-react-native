@@ -9,7 +9,7 @@ type Props = {
   onPlayer: () => void;
 };
 
-function Player({ onPlayer }: Props) {
+function SmallPlayer({ onPlayer }: Props) {
   return (
     <PlayerView.View activeOpacity={0.9} onPress={onPlayer}>
       <PlayerView.AlbumArt source={mito} resizeMode="cover" />
@@ -65,4 +65,4 @@ const PlayerView = {
   `,
 };
 
-export default Player;
+export default SmallPlayer;

@@ -1,23 +1,22 @@
 import React from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Text } from "react-native";
 import styled, { css } from "styled-components/native";
-import { Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import SpotifyPalette from "../../styles/Palette";
+import SpotifyPalette from "../../../styles/Palette";
 import { Video } from "expo-av";
-import scaredycat from "../../assets/video/scaredy-cat.mov";
+import scaredycat from "../../../assets/video/scaredy-cat.mov";
 import { useEffect } from "react";
-import { FullScreen } from "../../styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";
+import { SharedElement } from "react-navigation-shared-element";
+import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
 
 type Props = {
-  offset: Animated.Value;
-  offPlayer: () => void;
+  navigation: StackNavigationProp<any>;
 };
 
-function PlayerScreen({ offset, offPlayer }: Props) {
+function PlayerScreen({ navigation }: any) {
   const refVideo = React.useRef<Video>(null);
 
   useEffect(() => {
@@ -25,18 +24,7 @@ function PlayerScreen({ offset, offPlayer }: Props) {
   }, []);
 
   return (
-    <Wrap
-      style={{
-        transform: [
-          {
-            translateY: offset.interpolate({
-              inputRange: [0, 100],
-              outputRange: [Dimensions.get("screen").height, 0],
-            }),
-          },
-        ],
-      }}
-    >
+    <Wrap>
       <PlayerView>
         <VideoView>
           <MusicVideo
@@ -65,8 +53,8 @@ function PlayerScreen({ offset, offPlayer }: Props) {
                 <Ionicons
                   name="chevron-down-outline"
                   size={28}
-                  onPress={offPlayer}
                   color={SpotifyPalette["White"]}
+                  onPress={() => navigation.goBack()}
                 />
                 <Header.AlbumTitle>Moodswings in This Order</Header.AlbumTitle>
                 <Ionicons
@@ -116,7 +104,18 @@ function PlayerScreen({ offset, offPlayer }: Props) {
                 />
               </MusicView.IconView>
             </MusicView.Wrap>
-            <LyricsView></LyricsView>
+            <Lyrics.Wrap>
+              <Lyrics.ViewButton
+                activeOpacity={0.8}
+                onPress={() => navigation.navigate("Lyrics")}
+              >
+                <SharedElement id="view">
+                  <Lyrics.View>
+                    <Lyrics.Text>가사</Lyrics.Text>
+                  </Lyrics.View>
+                </SharedElement>
+              </Lyrics.ViewButton>
+            </Lyrics.Wrap>
           </ContentView.Wrap>
         </LinearGradient>
       </PlayerView>
@@ -129,9 +128,23 @@ const PlayerView = styled.ScrollView`
   height: 100%;
 `;
 
-const LyricsView = styled.View`
-  height: 500px;
-`;
+const Lyrics = {
+  Wrap: styled.View`
+    padding: 0 4px 30px;
+  `,
+  ViewButton: styled.TouchableOpacity``,
+  View: styled.View`
+    height: 400px;
+    background-color: #8d8d8d;
+    border-radius: 10px;
+    padding: 20px 10px;
+  `,
+  Text: styled.Text`
+    font-size: 12px;
+    color: ${SpotifyPalette["White"]};
+    font-weight: 700;
+  `,
+};
 
 const MusicView = {
   Wrap: styled.View`
@@ -183,11 +196,8 @@ const VideoView = styled.View`
   height: ${Dimensions.get("screen").height}px;
 `;
 
-const Wrap = styled(Animated.View)`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
+const Wrap = styled.View`
+  flex: 1;
 
   background-color: #fff;
 `;
