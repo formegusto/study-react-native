@@ -90,7 +90,7 @@ const GenreDetail = {
     padding: 0 0 16px 16px;
 
     background-color: ${SpotifyPalette["Black"]};
-    box-shadow: 0 4px 5px #000;
+    box-shadow: 0 5px 2px rgba(0, 0, 0, 0.3);
   `,
   Title: styled.Text`
     color: ${SpotifyPalette["White"]};

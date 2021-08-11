@@ -61,7 +61,17 @@ function ArtistScreen({ navigation }: Props) {
         )}
       >
         <Artist.NameView>
-          <Artist.Name>DPR IAN</Artist.Name>
+          <Artist.Name
+            style={{
+              opacity: offsetY.interpolate({
+                inputRange: [130, 190],
+                outputRange: [1, 0],
+                extrapolate: "clamp",
+              }),
+            }}
+          >
+            DPR IAN
+          </Artist.Name>
         </Artist.NameView>
         <MusicList />
         <MusicList />
@@ -69,12 +79,66 @@ function ArtistScreen({ navigation }: Props) {
       </Artist.View>
 
       <HeaderView.View>
-        <HeaderView.BackIcon
-          name="chevron-back-outline"
-          size={24}
-          color="#FFF"
-          onPress={goBack}
+        <HeaderView.BackgroundColorWrap
+          style={{
+            opacity: offsetY.interpolate({
+              inputRange: [0, 100],
+              outputRange: [0, 1],
+              extrapolate: "clamp",
+            }),
+          }}
         />
+        <HeaderView.TitleView>
+          <HeaderView.Title
+            style={{
+              transform: [
+                {
+                  translateY: offsetY.interpolate({
+                    inputRange: [0, 250],
+                    outputRange: [68, 0],
+                    extrapolate: "clamp",
+                  }),
+                },
+              ],
+              opacity: offsetY.interpolate({
+                inputRange: [150, 250],
+                outputRange: [0, 1],
+                extrapolate: "clamp",
+              }),
+            }}
+          >
+            DPR IAN
+          </HeaderView.Title>
+        </HeaderView.TitleView>
+        <HeaderView.BackIconWrap
+          style={{
+            transform: [
+              {
+                translateX: offsetY.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: [16, 6],
+                  extrapolate: "clamp",
+                }),
+              },
+            ],
+          }}
+        >
+          <HeaderView.BackIconColorWrap
+            style={{
+              opacity: offsetY.interpolate({
+                inputRange: [0, 100],
+                outputRange: [1, 0],
+                extrapolate: "clamp",
+              }),
+            }}
+          />
+          <HeaderView.BackIcon
+            name="chevron-back-outline"
+            size={24}
+            color="#FFF"
+            onPress={goBack}
+          />
+        </HeaderView.BackIconWrap>
       </HeaderView.View>
     </FullScreen>
   );
@@ -84,7 +148,44 @@ const HeaderView = {
   View: styled.View`
     position: absolute;
     top: 0;
-    padding: ${getStatusBarHeight()}px 16px 0;
+    padding: ${getStatusBarHeight()}px 0 0;
+    width: 100%;
+    height: ${getStatusBarHeight() + 10}px;
+  `,
+  TitleView: styled.View`
+    position: absolute;
+    top: ${getStatusBarHeight() + 12}px;
+    width: 100%;
+    height: 28px;
+    align-items: center;
+    overflow: hidden;
+  `,
+  Title: styled(Animated.Text)`
+    color: ${SpotifyPalette["White"]};
+    font-size: 12px;
+    font-weight: 700;
+  `,
+  BackgroundColorWrap: styled(Animated.View)`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: ${getStatusBarHeight() + 45}px;
+    background-color: ${SpotifyPalette["Black"]};
+  `,
+  BackIconColorWrap: styled(Animated.View)`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  `,
+  BackIconWrap: styled(Animated.View)`
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(16px);
+    overflow: hidden;
   `,
   BackIcon: styled(Ionicons)``,
 };
@@ -115,7 +216,7 @@ const Artist = {
   NameView: styled(Animated.View)`
     height: 300px;
   `,
-  Name: styled.Text`
+  Name: styled(Animated.Text)`
     position: absolute;
     bottom: 10px;
     color: ${SpotifyPalette["White"]};
