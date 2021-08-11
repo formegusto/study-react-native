@@ -73,7 +73,21 @@ function ArtistScreen({ navigation }: Props) {
             DPR IAN
           </Artist.Name>
         </Artist.NameView>
-        <MusicContent.View></MusicContent.View>
+        <MusicContent.View>
+          <MusicContent.ListenerText>
+            월별 청취자 13,714명
+          </MusicContent.ListenerText>
+          <MusicContent.BottomView>
+            <MusicContent.FollowBtn activeOpacity={0.8}>
+              <MusicContent.FollowText>팔로우하기</MusicContent.FollowText>
+            </MusicContent.FollowBtn>
+            <Ionicons
+              name="ellipsis-horizontal"
+              size={24}
+              color={SpotifyPalette["White"]}
+            />
+          </MusicContent.BottomView>
+        </MusicContent.View>
         <MusicList />
         <MusicList />
         <MusicList />
@@ -167,7 +181,9 @@ function ArtistScreen({ navigation }: Props) {
 const MusicContent = {
   View: styled.View`
     margin: 8px 0 0;
-    height: 64px;
+    height: 76px;
+
+    justify-content: center;
   `,
   PlayBtnWrap: styled(Animated.View)`
     position: absolute;
@@ -175,6 +191,30 @@ const MusicContent = {
     right: 12px;
   `,
   PlayBtn: styled(Ionicons)``,
+  ListenerText: styled.Text`
+    color: #8d8d8d;
+    font-size: 12px;
+
+    margin: 0 0 12px;
+  `,
+  BottomView: styled.View`
+    flex-direction: row;
+    align-items: center;
+  `,
+  FollowBtn: styled.TouchableOpacity`
+    padding: 8px 20px;
+
+    border: 1px solid #fff;
+    border-radius: 8px;
+
+    margin: 0 30px 0 0;
+    justify-content: center;
+    align-items: center;
+  `,
+  FollowText: styled.Text`
+    color: ${SpotifyPalette["White"]};
+    font-size: 12px;
+  `,
 };
 const HeaderView = {
   View: styled.View`
