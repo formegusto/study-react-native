@@ -29,7 +29,7 @@ function ArtistScreen({ navigation }: Props) {
           resizeMode="cover"
           style={{
             width: offsetY.interpolate({
-              inputRange: [0, 200],
+              inputRange: [0, 150],
               outputRange: [
                 Dimensions.get("screen").width + 50,
                 Dimensions.get("screen").width,
@@ -73,6 +73,7 @@ function ArtistScreen({ navigation }: Props) {
             DPR IAN
           </Artist.Name>
         </Artist.NameView>
+        <MusicContent.View></MusicContent.View>
         <MusicList />
         <MusicList />
         <MusicList />
@@ -140,10 +141,41 @@ function ArtistScreen({ navigation }: Props) {
           />
         </HeaderView.BackIconWrap>
       </HeaderView.View>
+      <MusicContent.PlayBtnWrap
+        style={{
+          transform: [
+            {
+              translateY: offsetY.interpolate({
+                inputRange: [0, 260],
+                outputRange: [0, -260],
+                extrapolateRight: "clamp",
+              }),
+            },
+          ],
+        }}
+      >
+        <MusicContent.PlayBtn
+          name="caret-forward-circle"
+          size={68}
+          color={SpotifyPalette["Green"]}
+        />
+      </MusicContent.PlayBtnWrap>
     </FullScreen>
   );
 }
 
+const MusicContent = {
+  View: styled.View`
+    margin: 8px 0 0;
+    height: 64px;
+  `,
+  PlayBtnWrap: styled(Animated.View)`
+    position: absolute;
+    top: 314px;
+    right: 12px;
+  `,
+  PlayBtn: styled(Ionicons)``,
+};
 const HeaderView = {
   View: styled.View`
     position: absolute;
