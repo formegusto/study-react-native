@@ -31,6 +31,10 @@ function HomeScreen({ navigation }: Props) {
     navigation.push("Album");
   }, [navigation]);
 
+  const goArtist = React.useCallback(() => {
+    navigation.push("Artist");
+  }, [navigation]);
+
   return (
     <FullScreen>
       <Animated.ScrollView
@@ -90,6 +94,7 @@ function HomeScreen({ navigation }: Props) {
               isOnlyTitle
               images={artist_images}
               title="DPR IAN"
+              onPress={goArtist}
             />
           </Wrap>
           <Wrap horizontalMargin="onlyOne">

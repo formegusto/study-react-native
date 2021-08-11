@@ -1,5 +1,8 @@
 import React from "react";
+import { Share } from "react-native";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import { AllGenres, MyGenres } from "../../stores/Genre";
+import GenreDetailScreen from "./GenreDetailScreen";
 import IntroScreen from "./IntroScreen";
 import SearchScreen from "./SearchScreen";
 
@@ -30,6 +33,25 @@ const SearchStack = (props: any) => {
           { id: "title", animation: "fade" },
           { id: "desc", animation: "fade" },
         ]}
+      />
+      <Shared.Screen
+        name="GenreDetail"
+        component={GenreDetailScreen}
+        options={{
+          gestureEnabled: false,
+          transitionSpec: {
+            open: { animation: "timing", config: { duration: 900 } },
+            close: { animation: "timing", config: { duration: 900 } },
+          },
+          cardStyleInterpolator: ({ current: { progress } }) => ({
+            cardStyle: {
+              opacity: progress,
+            },
+          }),
+        }}
+        sharedElementsConfig={() =>
+          [...MyGenres, ...AllGenres].map((genre) => genre.title)
+        }
       />
     </Shared.Navigator>
   );

@@ -1,23 +1,29 @@
 import React from "react";
 import { Dimensions } from "react-native";
+import { SharedElement } from "react-navigation-shared-element";
 import styled, { css } from "styled-components/native";
 import SpotifyPalette from "../../styles/Palette";
 
 type ItemProps = {
   item: any;
   isMargin: boolean;
+  onPress?: (item: any) => void;
 };
 
-function SmallCard({ item, isMargin }: ItemProps) {
+function SmallCard({ item, isMargin, onPress }: ItemProps) {
   return (
-    <Card.View color={item.color} isMargin={isMargin}>
+    <Card.View
+      color={item.color}
+      isMargin={isMargin}
+      onPress={onPress ? () => onPress(item) : () => null}
+    >
       <Card.Title>{item.title}</Card.Title>
     </Card.View>
   );
 }
 
 const Card = {
-  View: styled.View<{ color: string; isMargin: boolean }>`
+  View: styled.TouchableOpacity<{ color: string; isMargin: boolean }>`
     width: ${Dimensions.get("screen").width / 2 - 26}px;
     height: ${Dimensions.get("screen").width / 4}px;
     padding: 12px 16px 16px;
@@ -44,13 +50,16 @@ const Card = {
 
 type GridProps = {
   items?: any[];
+  navigation?: (item: any) => void;
 };
 
-function SmallCardGrid({ items }: GridProps) {
+function SmallCardGrid({ items, navigation }: GridProps) {
   return (
     <Grid.View>
       {items?.map((item, idx) => (
-        <SmallCard item={item} key={idx} isMargin={idx % 2 == 0} />
+        <SharedElement id={item.title} key={item.title}>
+          <SmallCard item={item} isMargin={idx % 2 == 0} onPress={navigation} />
+        </SharedElement>
       ))}
     </Grid.View>
   );

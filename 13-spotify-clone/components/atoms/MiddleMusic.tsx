@@ -10,11 +10,12 @@ type Props = {
   images?: any[];
   isFull?: boolean;
   title?: string;
+  onPress?: () => void;
 };
 
 function MiddleMusicItem(props: Props) {
   return (
-    <Item.View>
+    <Item.View activeOpacity={1} onPress={props.onPress}>
       <Item.ImageGrid {...props}>
         {}
         {props.images?.length === 1 ? (
@@ -32,7 +33,7 @@ function MiddleMusicItem(props: Props) {
 }
 
 const Item = {
-  View: styled.View`
+  View: styled.TouchableOpacity`
     margin: 0 16px 0 0;
   `,
   ImageGrid: styled.View<Props>`

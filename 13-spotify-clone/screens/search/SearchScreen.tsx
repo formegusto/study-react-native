@@ -22,6 +22,13 @@ function SearchScreen({ navigation }: Props) {
     navigation.navigate("Intro");
   }, [navigation]);
 
+  const onDetail = React.useCallback(
+    (item: any) => {
+      navigation.navigate("GenreDetail", { item });
+    },
+    [navigation]
+  );
+
   return (
     <FullScreen dark>
       <SafeAreaView>
@@ -47,9 +54,9 @@ function SearchScreen({ navigation }: Props) {
             <BigCard intro={intro} />
           </TouchableOpacity>
           <GenreTitle>가장 많이 듣는 장르</GenreTitle>
-          <SmallCardGrid items={MyGenres} />
+          <SmallCardGrid items={MyGenres} navigation={onDetail} />
           <GenreTitle>모두 찾아보기</GenreTitle>
-          <SmallCardGrid items={AllGenres} />
+          <SmallCardGrid items={AllGenres} navigation={onDetail} />
         </SearchView>
       </SafeAreaView>
     </FullScreen>

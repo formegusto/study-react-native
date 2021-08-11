@@ -80,6 +80,7 @@ function AlbumScreen({ navigation }: Props) {
             </Album.PlayButton>
           </Wrap>
           <MusicList />
+          <MusicList />
         </LinearGradient>
       </Animated.ScrollView>
       <AlbumImageHeader>
@@ -88,16 +89,19 @@ function AlbumScreen({ navigation }: Props) {
           resizeMode="cover"
           style={{
             opacity: offset.interpolate({
-              inputRange: [0, 250],
+              inputRange: [0, 150],
               outputRange: [1, 0],
+              extrapolate: "clamp",
             }),
             width: offset.interpolate({
               inputRange: [0, 250],
               outputRange: [250, 0],
+              extrapolate: "clamp",
             }),
             height: offset.interpolate({
               inputRange: [0, 250],
               outputRange: [250, 0],
+              extrapolate: "clamp",
             }),
           }}
         />
