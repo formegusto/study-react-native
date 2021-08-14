@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { Dimensions, StyleSheet, Text } from "react-native";
 import styled from "styled-components/native";
 import { FullScreen } from "../../styles";
 import { Ionicons } from "@expo/vector-icons";
@@ -42,7 +42,7 @@ function AlbumScreen({ navigation }: Props) {
             "rgba(25,20,20,1)",
           ]}
           start={[0, 0]}
-          end={[0, 1]}
+          end={[0, 0.5]}
           style={{ ...Styles.empty, paddingHorizontal: 16 }}
         >
           <Wrap>
@@ -71,13 +71,6 @@ function AlbumScreen({ navigation }: Props) {
                 color={SpotifyPalette["White"]}
               />
             </Album.IconView>
-            <Album.PlayButton>
-              <Ionicons
-                name="caret-forward-circle"
-                size={64}
-                color={SpotifyPalette["Green"]}
-              />
-            </Album.PlayButton>
           </Wrap>
           <MusicList />
           <MusicList />
@@ -89,17 +82,17 @@ function AlbumScreen({ navigation }: Props) {
           resizeMode="cover"
           style={{
             opacity: offset.interpolate({
-              inputRange: [0, 150],
+              inputRange: [0, 200],
               outputRange: [1, 0],
               extrapolate: "clamp",
             }),
             width: offset.interpolate({
-              inputRange: [0, 250],
+              inputRange: [0, 200],
               outputRange: [250, 0],
               extrapolate: "clamp",
             }),
             height: offset.interpolate({
-              inputRange: [0, 250],
+              inputRange: [0, 200],
               outputRange: [250, 0],
               extrapolate: "clamp",
             }),
@@ -107,6 +100,36 @@ function AlbumScreen({ navigation }: Props) {
         />
       </AlbumImageHeader>
       <AlbumNavHeader>
+        <AlbumNavWrap.View
+          style={{
+            opacity: offset.interpolate({
+              inputRange: [0, 150],
+              outputRange: [0, 1],
+              extrapolate: "clamp",
+            }),
+          }}
+        >
+          <AlbumNavWrap.Title
+            style={{
+              opacity: offset.interpolate({
+                inputRange: [240, 300],
+                outputRange: [0, 1],
+                extrapolate: "clamp",
+              }),
+              transform: [
+                {
+                  translateY: offset.interpolate({
+                    inputRange: [240, 300],
+                    outputRange: [40, 0],
+                    extrapolate: "clamp",
+                  }),
+                },
+              ],
+            }}
+          >
+            Moodswings in This Order
+          </AlbumNavWrap.Title>
+        </AlbumNavWrap.View>
         <Ionicons
           name="chevron-back-outline"
           size={24}
@@ -114,6 +137,25 @@ function AlbumScreen({ navigation }: Props) {
           onPress={goBack}
         />
       </AlbumNavHeader>
+      <Album.PlayButton
+        style={{
+          transform: [
+            {
+              translateY: offset.interpolate({
+                inputRange: [0, 335],
+                outputRange: [0, -335],
+                extrapolateRight: "clamp",
+              }),
+            },
+          ],
+        }}
+      >
+        <Ionicons
+          name="caret-forward-circle"
+          size={64}
+          color={SpotifyPalette["Green"]}
+        />
+      </Album.PlayButton>
     </FullScreen>
   );
 }
@@ -133,10 +175,10 @@ const Album = {
   IconView: styled.View`
     flex-direction: row;
   `,
-  PlayButton: styled.View`
+  PlayButton: styled(Animated.View)`
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 16px;
+    top: 390px;
   `,
 };
 
@@ -170,10 +212,29 @@ const Styles = StyleSheet.create({
 
 const AlbumNavHeader = styled.View`
   position: absolute;
-  top: ${getStatusBarHeight()}px;
-
-  padding: 0 16px 0;
+  padding: ${getStatusBarHeight()}px 16px 0;
 `;
+
+const AlbumNavWrap = {
+  View: styled(Animated.View)`
+    position: absolute;
+    top: 0;
+    width: ${Dimensions.get("screen").width}px;
+    background-color: #2b2b2b;
+
+    /* justify-content: center; */
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: ${getStatusBarHeight() + 6}px 0 20px;
+  `,
+  Title: styled(Animated.Text)`
+    color: ${SpotifyPalette["White"]};
+    font-size: 12px;
+    font-weight: 900;
+  `,
+};
 
 const AlbumImageHeader = styled.View`
   position: absolute;
